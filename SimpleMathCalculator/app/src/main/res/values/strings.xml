@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SimpleMathCalculator</string>
+    <string name="app_title">Math Calculator</string>
+    <string name="num1">5</string>
+    <string name="num2">3</string>
+    <string name="add_button">+</string>
+    <string name="subtract_button">-</string>
+    <string name="multiply_button">*</string>
+    <string name="divide_button">/</string>
 </resources>
