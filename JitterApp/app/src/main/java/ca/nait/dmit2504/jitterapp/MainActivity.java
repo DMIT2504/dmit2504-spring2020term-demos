@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import retrofit2.Call;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();   // simpleName = "MainActivity"
 
     private TextView mJitterText;
+
+    private ListView mJitterListView;
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
@@ -50,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // find the textview in the layout
-        mJitterText = findViewById(R.id.jitters_text);
+//        mJitterText = findViewById(R.id.jitters_text);
+        mJitterListView = findViewById(R.id.jittersListView);
 
         // Generate an implementation of the Retrofit interface
         Retrofit retrofit = new Retrofit.Builder()
@@ -64,8 +69,16 @@ public class MainActivity extends AppCompatActivity {
         getCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(final Call<String> call, final Response<String> response) {
-                Log.i(TAG,"success getting data");
-                mJitterText.setText(response.body());
+                Log.i(TAG,"success getting data ");
+                String responseBodyText = response.body();
+                String[] responseArray = responseBodyText.split("\r\n");
+
+                ArrayAdapter<String> jittersAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, responseArray);
+                mJitterListView.setAdapter(jittersAdapter);
+//                mJitterText.setText(response.body());
+
+                // Split the response.body() string values into an array of single jitter
+                // and populate the listview
             }
 
             @Override
