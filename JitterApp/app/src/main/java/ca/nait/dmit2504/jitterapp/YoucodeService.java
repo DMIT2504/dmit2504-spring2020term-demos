@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 
 public interface YoucodeService {
 
-    @GET("JSONServlet")
+    @GET("JSONServlet") // response body format: [date] from [login_name] *** [data]
     Call<String> listJSONServlet();
 
     @FormUrlEncoded
