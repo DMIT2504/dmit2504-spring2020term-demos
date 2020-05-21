@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         ConstraintLayout layout = findViewById(R.id.activity_main_layout);
         layout.setBackgroundColor(Color.parseColor(colorName));
 //        getWindow().getDecorView().setBackgroundColor(Color.parseColor(colorName));
-        int fontSize = prefs.getInt("fontsize_pref", 8);
+        // Set the minimum font size to 12
+        int fontSize = prefs.getInt("fontsize_pref", 0) + 12;
         helloText.setTextSize(fontSize);
 
     }
