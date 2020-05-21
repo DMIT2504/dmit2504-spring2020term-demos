@@ -1,0 +1,43 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/login_header">
+        <EditTextPreference
+            android:key="username_pref"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/username"
+            android:summary="Set login username"/>
+        <EditTextPreference
+            android:key="password_pref"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/password"
+            android:summary="Set password"/>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="autologin_ref"
+            android:title="@string/autologin"
+            android:summary="Auto login next time"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/font_header">
+        <ListPreference android:key="backgroundColor_pref"
+            android:title="@string/backgroundcolor"
+            android:summary="@string/backgroundcolor_summary"
+            android:entries="@array/color_options"
+            android:entryValues="@array/color_options_values"
+            android:dialogTitle="@string/backgroundcolor"
+            android:defaultValue="Green"
+            />
+
+        <SeekBarPreference
+            android:key="fontsize_pref"
+            android:title="@string/font_size"
+            android:max="32"
+            android:defaultValue="8"/>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

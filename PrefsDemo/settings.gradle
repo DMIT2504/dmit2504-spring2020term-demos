@@ -1,0 +1,2 @@
+rootProject.name='PrefsDemo'
+include ':app'
