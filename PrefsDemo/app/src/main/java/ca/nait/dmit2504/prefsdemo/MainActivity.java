@@ -3,6 +3,7 @@ package ca.nait.dmit2504.prefsdemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             startActivity(intent);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onPause();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -75,4 +79,5 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.unregisterOnSharedPreferenceChangeListener(this);
     }
+
 }
