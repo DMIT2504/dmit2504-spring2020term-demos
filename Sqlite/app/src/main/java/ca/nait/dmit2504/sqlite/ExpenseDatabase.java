@@ -57,6 +57,7 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         // Construct a SQL query statement
         String queryStatement = "SELECT _id, "
+
                 + COLUMN_DESCRIPTION + ", "
                 + COLUMN_AMOUNT + ", "
                 + COLUMN_DATE
