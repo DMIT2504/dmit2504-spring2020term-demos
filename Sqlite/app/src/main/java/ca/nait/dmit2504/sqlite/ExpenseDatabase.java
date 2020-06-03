@@ -11,7 +11,7 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
 
     // Step 2: Define constants for database name, database version, table name, column names
     private static final String DATABASE_NAME = "expenses.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String TABLE_EXPENSE = "expenses";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_AMOUNT = "amount";
@@ -37,6 +37,11 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         // SQL code to execute when database schema changes (database version)
         db.execSQL("DROP TABLE " + TABLE_EXPENSE);
+        db.execSQL("CREATE TABLE " + TABLE_EXPENSE
+                + "(_id INTEGER PRIMARY KEY, "
+                + COLUMN_DESCRIPTION + " TEXT, "
+                +   COLUMN_AMOUNT + " TEXT, "
+                +  COLUMN_DATE + " TEXT);");
     }
 
     // Step 4: Code methods to perform database operations

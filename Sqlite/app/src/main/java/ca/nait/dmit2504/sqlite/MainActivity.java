@@ -30,20 +30,31 @@ public class MainActivity extends AppCompatActivity {
         mDescriptionEditText = findViewById(R.id.activity_main_description_edit);
         mAmountEditText = findViewById(R.id.activity_main_amount_edit);
         mDateEditText = findViewById(R.id.activity_main_date_edit);
-        mExpensesListView = findViewById(R.id.activity_list_expenses_listview);
+        mExpensesListView = findViewById(R.id.activity_main_expenses_listview);
 
         mExpenseDatabase = new ExpenseDatabase(this);
 
+        rebindListView();
+    }
+
+    private void rebindListView() {
         Cursor dbCursor = mExpenseDatabase.getAllExpenses();
         // Define an array of columns names used by the cursor
         String[] fromFields = {"_id", "description", "amount", "date"};
         // Define an array of resource ids in the listview item layout
         int[] toViews = new int[] {
                 R.id.listview_item_expenseId,
-                R.id.listview_item_amount};
-
-
-
+                R.id.listview_item_description,
+                R.id.listview_item_amount,
+                R.id.listview_item_date
+        };
+        // Create a SimpleCursorAdapter for the ListView
+        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
+                R.layout.listview_item,
+                dbCursor,
+                fromFields,
+                toViews);
+        mExpensesListView.setAdapter(cursorAdapter);
     }
 
     public void onAddExpense(View view) {
@@ -58,5 +69,7 @@ public class MainActivity extends AppCompatActivity {
         mDescriptionEditText.setText("");
         mAmountEditText.setText("");
         mDateEditText.setText("");
+
+        rebindListView();
     }
 }
