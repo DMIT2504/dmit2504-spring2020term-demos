@@ -37,11 +37,7 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         // SQL code to execute when database schema changes (database version)
         db.execSQL("DROP TABLE " + TABLE_EXPENSE);
-        db.execSQL("CREATE TABLE " + TABLE_EXPENSE
-                + "(_id INTEGER PRIMARY KEY, "
-                + COLUMN_DESCRIPTION + " TEXT, "
-                +   COLUMN_AMOUNT + " TEXT, "
-                +  COLUMN_DATE + " TEXT);");
+        onCreate(db);
     }
 
     // Step 4: Code methods to perform database operations
