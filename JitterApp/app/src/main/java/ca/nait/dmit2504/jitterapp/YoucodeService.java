@@ -7,8 +7,11 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface YoucodeService {
+    
+    @GET("JitterServlet")   //  response body format: 	sender\n\message\n\date
+    Call<String> listJitterServlet();
 
-    @GET("JSONServlet") // response body format: [date] from [login_name] *** [data]
+    @GET("JSONServlet")     //  response body format:	[date] from [sender] *** [message]
     Call<String> listJSONServlet();
 
     @FormUrlEncoded
