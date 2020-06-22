@@ -54,7 +54,7 @@ public class ExpenseAdapter extends BaseAdapter {
         TextView dateTextView = listItemView.findViewById(R.id.listview_item_date);
 
         Expense currentExpense = mExpenses.get(position);
-        expenseIdTextView.setText(currentExpense.getId());
+        expenseIdTextView.setText(String.valueOf(currentExpense.getId()));
         descriptionTextView.setText(currentExpense.getDescription());
         amountTextView.setText(currentExpense.getAmount());
         dateTextView.setText(currentExpense.getDate());

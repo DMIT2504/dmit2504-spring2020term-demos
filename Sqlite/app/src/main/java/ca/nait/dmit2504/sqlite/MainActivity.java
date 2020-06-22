@@ -6,6 +6,7 @@ import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -31,6 +32,29 @@ public class MainActivity extends AppCompatActivity {
         mAmountEditText = findViewById(R.id.activity_main_amount_edit);
         mDateEditText = findViewById(R.id.activity_main_date_edit);
         mExpensesListView = findViewById(R.id.activity_main_expenses_listview);
+
+        // Allow user to edit an expense when the list item is clicked
+        mExpensesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+                Expense singleResult = mExpenseDatabase.findExpense(id);
+                if (singleResult != null) {
+                    mDescriptionEditText.setText(singleResult.getDescription());
+                    mAmountEditText.setText(singleResult.getAmount());
+                    mDateEditText.setText(singleResult.getDate());
+                }
+            }
+        });
+
+        // Allow user to delete an expense when the list item is long clicked
+        mExpensesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+                mExpenseDatabase.deleteExpense(id);
+                rebindListView();
+                return true;
+            }
+        });
 
         mExpenseDatabase = new ExpenseDatabase(this);
 

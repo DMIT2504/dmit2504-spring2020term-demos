@@ -2,18 +2,18 @@ package ca.nait.dmit2504.sqlite;
 
 public class Expense {
 
-    private Integer mId;
+    private long mId;
     private String mDescription;
     private String mAmount;
     private String mDate;
 
     // Generate getters+setters for each data field
 
-    public Integer getId() {
+    public long getId() {
         return mId;
     }
 
-    public void setId(final Integer id) {
+    public void setId(final long id) {
         mId = id;
     }
 
