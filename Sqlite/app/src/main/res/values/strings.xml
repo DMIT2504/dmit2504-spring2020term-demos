@@ -22,4 +22,7 @@
     <string name="hint_date">expense date</string>
     <string name="add_expense">Add Expense</string>
     <string name="create_new_record">Successfully created record with id of %d</string>
+    <string name="update_record">Successfully updated record with id of %d</string>
+    <string name="update_expense">Update Expense</string>
+    <string name="cancel">Cancel</string>
 </resources>

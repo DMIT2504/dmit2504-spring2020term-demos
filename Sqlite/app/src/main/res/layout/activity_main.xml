@@ -37,13 +37,36 @@
         android:hint="@string/hint_date"
         android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/activity_main_add_expense_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/add_expense"
-        android:onClick="onAddExpense"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activity_main_add_expense_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:onClick="onAddExpense"
+            android:text="@string/add_expense" />
+
+        <Button
+            android:id="@+id/activity_main_update_expense_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onUpdateExpense"
+            android:text="@string/update_expense" />
+
+        <Button
+            android:id="@+id/activity_main_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="cancelEditMode"
+            android:text="@android:string/cancel" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/activity_main_expenses_listview"

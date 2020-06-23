@@ -12,11 +12,11 @@ public class ExpenseDatabase extends SQLiteOpenHelper {
 
     // Step 2: Define constants for database name, database version, table name, column names
     private static final String DATABASE_NAME = "expenses.db";
-    private static final int DATABASE_VERSION = 2;
-    private static final String TABLE_EXPENSE = "expenses";
-    private static final String COLUMN_DESCRIPTION = "description";
-    private static final String COLUMN_AMOUNT = "amount";
-    private static final String COLUMN_DATE = "date";
+    private static final int DATABASE_VERSION = 3;
+    public static final String TABLE_EXPENSE = "expenses";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_AMOUNT = "amount";
+    public static final String COLUMN_DATE = "date";
 
     // Step 3: Create a constructor with a Context parameter and implement
     // the onCreate() and onUpgrade() methods
