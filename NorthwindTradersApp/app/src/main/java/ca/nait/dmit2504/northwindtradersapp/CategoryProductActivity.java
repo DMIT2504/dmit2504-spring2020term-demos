@@ -2,6 +2,7 @@ package ca.nait.dmit2504.northwindtradersapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -77,6 +78,23 @@ public class CategoryProductActivity extends AppCompatActivity {
             }
         });
 
+        mCategoryProductsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+                // The "id" parameters contains the primary key (productID) value from the database
+                // Pass the productID to the next activity
+                // You could also pass all the values in a Bundle to next activity
+                int productID = (int) id;
+                // Create a Intent to start the EditProductActivity
+                Intent startEditProductActivity = new Intent(getApplicationContext(), EditProductActivity.class);
+                // Pass the productID to next activity as an EXTRA
+                startEditProductActivity.putExtra("productID", productID);
+                // Start the next activity
+                startActivity(startEditProductActivity);
+
+                //startActivityForResult(startEditProductActivity, 1);
+            }
+        });
 
     }
 }

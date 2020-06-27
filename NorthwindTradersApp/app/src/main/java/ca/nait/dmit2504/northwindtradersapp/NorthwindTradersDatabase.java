@@ -69,7 +69,7 @@ public class NorthwindTradersDatabase extends SQLiteOpenHelper {
         values.put(TABLE_PRODUCT_COLUMN_PRODUCT_NAME, productName);
         values.put(TABLE_PRODUCT_COLUMN_UNIT_PRICE, unitPrice);
 
-        String whereClause = " WHERE _id = ?";
+        String whereClause = " _id = ?";
         String[] whereArgs = {String.valueOf(productID)};
         return db.update(TABLE_PRODUCT, values, whereClause, whereArgs);
     }
@@ -97,7 +97,7 @@ public class NorthwindTradersDatabase extends SQLiteOpenHelper {
         // Get a writeable database
         SQLiteDatabase db = getWritableDatabase();
 
-        String whereClause = " WHERE _id = ?";
+        String whereClause = " _id = ?";
         String[] whereArgs = {String.valueOf(productID)};
         return db.delete(TABLE_PRODUCT, whereClause, whereArgs);
     }
@@ -154,6 +154,21 @@ public class NorthwindTradersDatabase extends SQLiteOpenHelper {
             categories.add(singleCategory);
         }
         return  categories;
+    }
+
+    public Product findProduct(int productID) {
+        SQLiteDatabase db = getReadableDatabase();
+        String queryStatement = "SELECT _id, productName, unitPrice FROM product WHERE _id = ?";
+        String[] selectionArgs = {String.valueOf(productID)};
+        Cursor productCursor = db.rawQuery(queryStatement, selectionArgs);
+        Product foundProduct = null;
+        if (productCursor.moveToNext()) {
+            foundProduct = new Product();
+            foundProduct.productID = productCursor.getInt(0);
+            foundProduct.productName = productCursor.getString(1);
+            foundProduct.unitPrice = productCursor.getString(2);
+        }
+        return foundProduct;
     }
 
     // Return a single category for a given id
