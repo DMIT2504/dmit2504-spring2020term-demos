@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class NorthwindTradersDatabase extends SQLiteOpenHelper {
 
     // Step 2: Define data fields for database name, table name, and column names
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "NorthwindTraders.db";
     public static final String TABLE_CATEGORY = "category";
     public static final String TABLE_CATEGORY_COLUMN_ID = BaseColumns._ID;
@@ -47,7 +47,7 @@ public class NorthwindTradersDatabase extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO product(productName,unitPrice,categoryID) VALUES('Crab','200', 1);");
         db.execSQL("INSERT INTO product(productName,unitPrice,categoryID) VALUES('Fish','50', 1);");
         db.execSQL("INSERT INTO product(productName,unitPrice,categoryID) VALUES('Coca-Cola','5', 3);");
-        db.execSQL("INSERT INTO product(productName,unitPrice,categoryID) VALUES('Pepsi','4', 1);");
+        db.execSQL("INSERT INTO product(productName,unitPrice,categoryID) VALUES('Pepsi','4', 3);");
 
 
     }
@@ -58,6 +58,50 @@ public class NorthwindTradersDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE category;");
         onCreate(db);
     }
+
+    public int updateProduct(int productID, String productName, String unitPrice) {
+        // Get a writeable database
+        SQLiteDatabase db = getWritableDatabase();
+
+        // Construct a ContentValues to update
+        ContentValues values = new ContentValues();
+        values.put(TABLE_PRODUCT_COLUMN_ID, productID);
+        values.put(TABLE_PRODUCT_COLUMN_PRODUCT_NAME, productName);
+        values.put(TABLE_PRODUCT_COLUMN_UNIT_PRICE, unitPrice);
+
+        String whereClause = " WHERE _id = ?";
+        String[] whereArgs = {String.valueOf(productID)};
+        return db.update(TABLE_PRODUCT, values, whereClause, whereArgs);
+    }
+
+    public Product findProductByIndex(int productIndex, int categoryID) {
+        Product singleResult = null;
+
+        Cursor productCursor = findProductByCategory(categoryID);
+        int foundIndex = 0;
+        while (productCursor.moveToNext()) {
+            if (productIndex == foundIndex) {
+                singleResult = new Product();
+                singleResult.productID = productCursor.getInt(0);
+                singleResult.productName = productCursor.getString(1);
+                singleResult.unitPrice = productCursor.getString(2);
+                break;
+            }
+        }
+        productCursor.close();
+
+        return singleResult;
+    }
+
+    public int deleteProduct(int productID) {
+        // Get a writeable database
+        SQLiteDatabase db = getWritableDatabase();
+
+        String whereClause = " WHERE _id = ?";
+        String[] whereArgs = {String.valueOf(productID)};
+        return db.delete(TABLE_PRODUCT, whereClause, whereArgs);
+    }
+
 
     // Step 5: Add methods to perform CRUD operations
     public long createCategory(String categoryName, String description) {
